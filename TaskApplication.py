@@ -1,13 +1,22 @@
+from Repositories.CategoryRepository import CategoryRepository
+from Repositories.TaskRepository import TaskRepository
 from Services.TaskService import TaskService
 from Services.CategoryService import CategoryService
 from Services.ConsoleService import ConsoleService
+from DataBase import DataBase
 
-category_service = CategoryService()
-task_service = TaskService(category_service)
+connection_string = DataBase.get_connection_string()
+
+category_repository = CategoryRepository(connection_string)
+task_repository = TaskRepository(connection_string)
+
+category_service = CategoryService(category_repository)
+task_service = TaskService(category_repository, task_repository)
 console_service = ConsoleService()
 
 continue_application = True
 option_counter = 5
+
 
 while continue_application:
     if option_counter % 5 == 0:
