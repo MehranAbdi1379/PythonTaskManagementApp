@@ -14,7 +14,7 @@ class ConsoleService:
         print("5. Select a category")
         print("6. Show all categories")
         print("7. Add a category")
-        print("8. Remove a category")
+        print("8. Remove a category (Also removes all of the tasks in the category)")
 
     def print_options(self):
         print()
@@ -43,7 +43,7 @@ class ConsoleService:
         elif selected_option == "4":
             are_you_sure = input("Are You SURE (yes/no)?")
             if are_you_sure.lower() == "yes":
-                task_service.tasks.clear()
+                task_service.remove_all_tasks()
                 print("All tasks are removed!!!")
         elif selected_option == "5":
             category_id_string = input("Please enter the Id of category: ")
@@ -60,7 +60,7 @@ class ConsoleService:
         elif selected_option == "8":
             category_id_string = input("Please enter the Id of category: ")
             try:
-                category_id = int()
+                category_id = int(category_id_string)
                 category_service.remove_category(category_id)
             except ValueError:
                 print("please enter a valid value!!!")
