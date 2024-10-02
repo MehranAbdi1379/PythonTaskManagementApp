@@ -14,3 +14,19 @@ class TaskRepository(Repository):
             cursor.execute(query, (category_id,))
             rows = cursor.fetchall()
             return [self.map_function(row) for row in rows]
+
+    def get_all_done_tasks(self):
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            query = f"SELECT * FROM {self.table_name} WHERE is_done = 1"
+            cursor.execute(query)
+            rows = cursor.fetchall()
+            return [self.map_function(row) for row in rows]
+
+    def get_all_undone_tasks(self):
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            query = f"SELECT * FROM {self.table_name} WHERE is_done = 0"
+            cursor.execute(query)
+            rows = cursor.fetchall()
+            return [self.map_function(row) for row in rows]
