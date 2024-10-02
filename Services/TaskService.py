@@ -28,9 +28,7 @@ class TaskService:
         try:
             task = Task(task_name, category_id)
             self.task_repository.create(task)
-            category_name = self.category_repository.get_category_by_id(
-                category_id
-            ).name
+            category_name = self.category_repository.get_by_id(category_id).name
             print(
                 f"Task '{task_name}' added successfully with ID {task.id}, to the category '{category_name}'"
             )
