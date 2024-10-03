@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 class DataBase:
     def get_connection_string():
         # Connection string to SQL Server

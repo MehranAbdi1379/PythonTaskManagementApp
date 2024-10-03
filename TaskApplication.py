@@ -1,3 +1,4 @@
+from __future__ import annotations
 from Repositories.CategoryRepository import CategoryRepository
 from Repositories.TaskRepository import TaskRepository
 from Services.TaskService import TaskService
