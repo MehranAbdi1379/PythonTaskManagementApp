@@ -1,3 +1,8 @@
+from __future__ import annotations
+from Services.CategoryService import CategoryService
+from Services.TaskService import TaskService
+
+
 class ConsoleService:
     def __init__(self) -> None:
         pass
@@ -37,9 +42,9 @@ class ConsoleService:
 
     def run_selected_category_option(
         self,
-        task_service,
-        category_service,
-        selected_option,
+        task_service: TaskService,
+        category_service: CategoryService,
+        selected_option: str,
     ):
         if selected_option == "1":
             category_id_string = input("Please enter the Id of category: ")
@@ -78,9 +83,9 @@ class ConsoleService:
 
     def run_selected_task_option(
         self,
-        task_service,
-        category_service,
-        selected_option,
+        task_service: TaskService,
+        category_service: CategoryService,
+        selected_option: str,
     ):
         if selected_option == "1":
             task_service.show_all_tasks()
@@ -99,18 +104,28 @@ class ConsoleService:
             if are_you_sure.lower() == "yes":
                 task_service.remove_all_tasks()
                 print("All tasks are removed!!!")
-        # elif selected_option == '5':
-        # write code
-        # elif selected_option == '6':
-        # write code
-        # elif selected_option == '7':
-        # write code
-        # elif selected_option == '8':
-        # write code
-        # elif selected_option == '9':
-        # write code
-        # elif selected_option == '10':
-        # write code
+        elif selected_option == "5":
+            task_service.show_all_undone_tasks()
+        elif selected_option == "6":
+            task_service.show_all_done_tasks()
+        elif selected_option == "7":
+            task_id_string = input("Please enter the Id of task: ")
+            try:
+                task_id = int(task_id_string)
+                task_service.make_task_done(task_id)
+            except Exception as e:
+                print(e)
+        elif selected_option == "8":
+            task_service.remove_all_done_tasks()
+        elif selected_option == "9":
+            task_service.remove_all_undone_tasks()
+        elif selected_option == "10":
+            try:
+                task_service.show_tasks_by_category_id(
+                    category_service.selected_category_id
+                )
+            except Exception as e:
+                print(e)
         elif selected_option == "*":
             return False
         else:
@@ -118,7 +133,10 @@ class ConsoleService:
         return True
 
     def run_selected_category_of_options(
-        self, task_service, category_service, selected_option
+        self,
+        task_service: TaskService,
+        category_service: CategoryService,
+        selected_option: str,
     ):
         continue_with_options = True
         if selected_option == "1":

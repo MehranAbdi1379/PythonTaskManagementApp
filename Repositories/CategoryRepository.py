@@ -1,3 +1,4 @@
+from __future__ import annotations
 from Repositories.Repository import Repository
 from Repositories.ModelMappings import map_category
 
